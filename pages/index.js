@@ -1,21 +1,64 @@
+import 'isomorphic-fetch'
+
 export default class extends React.Component {
+
+  static async getInitialProps() {
+    let req = await fetch('https://api.audioboom.com/channels/recommended')
+    let { body: channels } = await req.json()
+    // console.log(channels)
+    return { channels }
+  }
+
   render() {
+    const { channels } = this.props
+
     return <div className='container'>
-      <h2>Hola John Serrano</h2>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt ratione delectus placeat ipsa voluptatibus nobis perspiciatis temporibus, aliquid earum excepturi voluptatum laborum repudiandae recusandae quae provident accusamus facilis officiis illum.</p>
-      <img src="/static/arquitecto-front-end.jpg" alt="prueba"/>
+      <header>Podcats</header>
+
+      <div className="channels">
+        { channels.map((channel) => (
+          <div className='channel' key={channel.id}>
+            <img src={channel.urls.logo_image.original} alt={channel.title}/>
+            <h2>{channel.title}</h2>
+          </div>
+        )) }
+      </div>
       <style jsx>{`
-        h2 {
-          color: red;
+        header {
+          color: #fff;
+          background: #8756ca;
+          padding: 15px;
+          text-align: center;
         }
-        .container :global(p) {
-          margin: 0;
-          color: grey;
-          font-size: 18px;
+        .channels {
+          display: grid;
+          grid-gap: 15px;
+          padding: 15px;
+          grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
         }
-        img {
-          max-width: 50%;
+        a.channel {
           display: block;
+          margin-bottom: 0.5em;
+          color: #333;
+          text-decoration: none;
+        }
+        .channel img {
+          border-radius: 3px;
+          box-shadow: 0px 2px 6px rgba(0,0,0,0.15);
+          width: 100%;
+        }
+        h2 {
+          padding: 5px;
+          font-size: 0.9em;
+          font-weight: 600;
+          margin: 0;
+          text-align: center;
+        }
+      `}</style>
+      <style jsx global>{`
+        body {
+          margin: 0;
+          font-family: system-ui;
         }
       `}</style>
     </div>
