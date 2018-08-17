@@ -8,7 +8,7 @@ export default class Layout extends React.Component {
     return <div>
       <Head>
         <title>{ title }</title>
-        <meta name="viewport" content="width=device-width"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
       </Head>
 
       <header><Link href="/"><a>Podcasts</a></Link></header>

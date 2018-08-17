@@ -1,5 +1,6 @@
 import 'isomorphic-fetch'
 import Link from 'next/link'
+import Layout from '../components/Layout';
 
 export default class extends React.Component {
 
@@ -16,8 +17,8 @@ export default class extends React.Component {
   render() {
     const { clip } = this.props
     // console.log(clip)
-    return <div>
 
+    return <Layout title={ clip.title }>
       <div className='modal'>
         <div className='clip'>
           <nav>
@@ -39,6 +40,7 @@ export default class extends React.Component {
           </div>
         </div>
       </div>
+
       <style jsx>{`
         header {
           color: #fff;
@@ -106,6 +108,10 @@ export default class extends React.Component {
           z-index: 99999;
         }
       `}</style>
+    </Layout>
+    return <div>
+
+      
 
       <style jsx global>{`
         body {
