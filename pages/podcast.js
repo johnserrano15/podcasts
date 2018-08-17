@@ -101,7 +101,8 @@ export default class extends React.Component {
 
         .modal {
           position: fixed;
-          top: 0;
+          {/* top: 0; */}
+          top: 50px;
           left: 0;
           right: 0;
           bottom: 0;
